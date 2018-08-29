@@ -16,7 +16,7 @@
 								<img class="card-img" src="{{ $post->file }}">
 							@endif
 							{{ $post->excerpt }}
-							<a href="#" class="pull-right">Leer más</a>
+							<a href="{{ route('post', $post->slug) }}" class="pull-right">Leer más</a>
 						</div>
 					</div>
 				@endforeach

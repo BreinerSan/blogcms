@@ -48,6 +48,9 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
+                            <li><a class="nav-link" href="{{ route('tags.index') }}">Etiquetas</a></li>
+                            <li><a class="nav-link" href="{{ route('categories.index') }}">Categorias</a></li>
+                            <li><a class="nav-link" href="{{ route('posts.index') }}">Entradas</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
