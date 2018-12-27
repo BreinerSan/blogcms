@@ -9,9 +9,11 @@
 					Crear Post
 				</div>
 				<div class="card-body">
-					<form action="{{ route('posts.store') }}" method="POST">
+					
+					{!! Form::open(['route'=> 'posts.store']) !!}
 						@include('admin.posts.partials.form')
-					</form>
+					{!! Form::close() !!}
+
 				</div>
 			</div>
 		</div>	

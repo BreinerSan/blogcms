@@ -9,10 +9,11 @@
 					Editar posts
 				</div>
 				<div class="card-body">
-					<form action="{{ route('posts.update', $post->id) }}" method="POST">
-						<input type="hidden" name="_method" value="PUT">
+					
+					{!! Form::model($post, ['route'=> ['posts.update', $post->id], 'method'=> 'PUT']) !!}
 						@include('admin.posts.partials.form')
-					</form>
+					{!! Form::close() !!}
+
 				</div>
 			</div>
 		</div>	
