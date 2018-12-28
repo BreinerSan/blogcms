@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Post;
@@ -57,6 +59,15 @@ class PostController extends Controller
     {
         $post = Post::create($request->all());
 
+        //Image
+        if($request->file('image')){
+            $path = Storage::disk('public')->put('image', $request->file('image'));
+            $post->fill(['file' => asset($path)])->save();
+        }
+
+        //Tags -> inserta el arreglo de tags y hace la insecion de estos mismos Tambien se puede usar sync en ves de attach
+        $post->tags()->attach($request->get('tags'));
+
         return redirect()->route('posts.edit', $post->id)
             ->with('info', 'Entrada creada con éxito');
     }
@@ -106,6 +117,15 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->fill($request->all())->save();
+
+        //Image
+        if($request->file('image')){
+            $path = Storage::disk('public')->put('image', $request->file('image'));
+            $post->fill(['file' => asset($path)])->save();
+        }
+
+        //Tags 
+        $post->tags()->sync($request->get('tags'));
 
         return redirect()->route('posts.edit', $post->id)
             ->with('info', 'Entrada actualizada con éxito');
